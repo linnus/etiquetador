@@ -25,7 +25,7 @@ function getCategoriaClass(value) {
   };
 
   for (let keyword in mappings) {
-    if (value.toLowerCase().includes(keyword)) {
+    if (String(value).toLowerCase().includes(keyword)) {
       return mappings[keyword];
     }
   }
@@ -33,13 +33,17 @@ function getCategoriaClass(value) {
 }
 
 function createDivsFromData(data) {
+  const onlyElectro = document.getElementById("onlyElectro").checked;
   const conteudoDiv = document.getElementById("conteudo");
   conteudoDiv.innerHTML = "";
 
   for (let i = 1; i < data.length; i++) {
     let row = data[i];
+    if (onlyElectro && !row.includes("ELETRO")) {
+      continue; // Pula para a próxima iteração se "apenas eletro" estiver marcado e a linha não contém "eletro"
+    }
     let div = document.createElement("div");
-    div.className = "labelA6";
+    div.className = onlyElectro ? "labelA9" : "labelA6";
 
     const categoriaClass = getCategoriaClass(row[1]);
 
