@@ -8,14 +8,12 @@
     margin: 0mm;
   }
   #conteudo {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 148mm;
+    display: flex;
     gap: 0mm;
     font-family: "Outfit", sans-serif;
     margin: 0mm;
     width: 100%;
-    max-width: 100%;
+    max-width: 210mm;
   }
   @page :left {
     margin: 0;
@@ -27,7 +25,7 @@
     width: 105mm;
     height: 148mm;
     min-height: 148mm;
-    border: 0px solid rgb(209, 209, 209);
+    border: 1px solid rgb(209, 209, 209, 0.5);
     padding: 16mm 10mm 34mm 10mm;
     box-sizing: border-box;
     position: relative;
@@ -37,6 +35,21 @@
     color-adjust: exact !important;
     print-color-adjust: exact !important;
     margin: 0;
+  }
+  .labelA9 {
+    width: 52mm;
+    height: 37mm;
+    min-height: 37mm;
+    min-width: 52mm;
+    border: 1px solid rgb(209, 209, 209, 0.5);
+    padding: 3mm;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   .labelA6:nth-child(4n) {
     page-break-after: always;
