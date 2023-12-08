@@ -37,7 +37,7 @@
     margin: 0;
   }
   .labelA9 {
-    width: 60mm;
+    width: 58mm;
     height: 37mm;
     min-height: 37mm;
     min-width: 60mm;
@@ -53,6 +53,9 @@
   }
   .labelA6:nth-child(4n) {
    /* page-break-after: always; */
+  }
+  .labelA9:nth-child(21n) {
+   page-break-after: always;
   }
 }
 
