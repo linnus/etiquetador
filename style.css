@@ -301,7 +301,7 @@ span {
 /* Etiquetas eletro */
 
 .labelA9 {
-  width: 58mm;
+  width: 54mm;
   height: 38mm;
   min-height: 37mm;
   min-width: 60mm;
@@ -327,7 +327,7 @@ span {
   position: absolute;
   top: 12mm;
   text-transform: uppercase;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 .labelA9 .sku {
@@ -385,7 +385,7 @@ span {
   content: "R$";
   margin-right: 5px;
   font-size: 5mm !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   line-height: 1;
 }
 
