@@ -301,10 +301,10 @@ span {
 /* Etiquetas eletro */
 
 .labelA9 {
-  width: 52mm;
-  height: 37mm;
+  width: 60mm;
+  height: 38mm;
   min-height: 37mm;
-  min-width: 52mm;
+  min-width: 60mm;
   border: 1px solid rgb(209, 209, 209);
   padding: 3mm;
   box-sizing: border-box;
@@ -327,6 +327,7 @@ span {
   position: absolute;
   top: 12mm;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .labelA9 .sku {
@@ -335,7 +336,7 @@ span {
   top: 3mm;
   right: 3mm;
   font-size: 3mm;
-  opacity: 0.5;
+  opacity: 1;
 }
 .labelA9 .categoria {
   height: 6mm;
@@ -361,6 +362,7 @@ span {
   color-adjust: exact !important;
   print-color-adjust: exact !important;
   font-size: 4mm;
+  font-weight: 500;
 }
 
 .labelA9 .preco_full {
@@ -382,7 +384,7 @@ span {
   content: "R$";
   margin-right: 5px;
   font-size: 5mm !important;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1;
 }
 
