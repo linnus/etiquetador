@@ -37,10 +37,10 @@
     margin: 0;
   }
   .labelA9 {
-    width: 52mm;
+    width: 60mm;
     height: 37mm;
     min-height: 37mm;
-    min-width: 52mm;
+    min-width: 60mm;
     border: 1px solid rgb(209, 209, 209, 0.5);
     padding: 3mm;
     box-sizing: border-box;
@@ -52,7 +52,7 @@
     print-color-adjust: exact !important;
   }
   .labelA6:nth-child(4n) {
-    page-break-after: always;
+   /* page-break-after: always; */
   }
 }
 
