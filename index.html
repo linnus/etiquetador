@@ -1,165 +1,115 @@
 <!DOCTYPE html>
-
-<html lang="pt_br">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link href="style.css" rel="stylesheet" />
-    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
-    <title>Gerador de etiquetas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de etiquetas - Camicado</title>
+    <link rel="stylesheet" type="text/css" href="gerador.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <div class="hero">
+    <div class="header">
       <img
         alt="Logo da Camicado"
         class="image"
         src="https://img.camicado.com.br/banner/icons/logo-color.svg"
       />
       <h1>Gerador de etiquetas</h1>
-      <h4>versão 0.37</h4>
+      <h4>versão 0.37 - 240221</h4>
     </div>
-    <form id="uploadForm">
-      <label class="label01" for="scriptChoice">selecione a planilha:</label>
-      <select id="scriptChoice">
-        <option value="script_01">reposição</option>
-        <option value="script_02">estoque de loja</option></select
-      ><br /><select id="storeChoice" style="display: none">
-        <option value="">selecione a loja</option>
-        <option value="30001">30001</option>
-        <option value="30002">30002</option>
-        <option value="30003">30003</option>
-        <option value="30005">30005</option>
-        <option value="30006">30006</option>
-        <option value="30007">30007</option>
-        <option value="30008">30008</option>
-        <option value="30009">30009</option>
-        <option value="30010">30010</option>
-        <option value="30011">30011</option>
-        <option value="30012">30012</option>
-        <option value="30017">30017</option>
-        <option value="30018">30018</option>
-        <option value="30019">30019</option>
-        <option value="30020">30020</option>
-        <option value="30022">30022</option>
-        <option value="30023">30023</option>
-        <option value="30025">30025</option>
-        <option value="30027">30027</option>
-        <option value="30028">30028</option>
-        <option value="30029">30029</option>
-        <option value="30030">30030</option>
-        <option value="30032">30032</option>
-        <option value="30034">30034</option>
-        <option value="30036">30036</option>
-        <option value="30038">30038</option>
-        <option value="30039">30039</option>
-        <option value="30043">30043</option>
-        <option value="30044">30044</option>
-        <option value="30046">30046</option>
-        <option value="30047">30047</option>
-        <option value="30049">30049</option>
-        <option value="30052">30052</option>
-        <option value="30053">30053</option>
-        <option value="30054">30054</option>
-        <option value="30056">30056</option>
-        <option value="30057">30057</option>
-        <option value="30059">30059</option>
-        <option value="30060">30060</option>
-        <option value="30061">30061</option>
-        <option value="30063">30063</option>
-        <option value="30064">30064</option>
-        <option value="30065">30065</option>
-        <option value="30066">30066</option>
-        <option value="30068">30068</option>
-        <option value="30069">30069</option>
-        <option value="30070">30070</option>
-        <option value="30071">30071</option>
-        <option value="30072">30072</option>
-        <option value="30073">30073</option>
-        <option value="30074">30074</option>
-        <option value="30075">30075</option>
-        <option value="30076">30076</option>
-        <option value="30077">30077</option>
-        <option value="30079">30079</option>
-        <option value="30080">30080</option>
-        <option value="30081">30081</option>
-        <option value="30082">30082</option>
-        <option value="30084">30084</option>
-        <option value="30086">30086</option>
-        <option value="30087">30087</option>
-        <option value="30090">30090</option>
-        <option value="30091">30091</option>
-        <option value="30093">30093</option>
-        <option value="30094">30094</option>
-        <option value="30095">30095</option>
-        <option value="30096">30096</option>
-        <option value="30102">30102</option>
-        <option value="30103">30103</option>
-        <option value="30104">30104</option>
-        <option value="30105">30105</option>
-        <option value="30106">30106</option>
-        <option value="30107">30107</option>
-        <option value="30108">30108</option>
-        <option value="30109">30109</option>
-        <option value="30110">30110</option>
-        <option value="30111">30111</option>
-        <option value="30112">30112</option>
-        <option value="30113">30113</option>
-        <option value="30114">30114</option>
-        <option value="30115">30115</option>
-        <option value="30116">30116</option>
-        <option value="30117">30117</option>
-        <option value="30118">30118</option>
-        <option value="30119">30119</option>
-        <option value="30120">30120</option>
-        <option value="30121">30121</option>
-        <option value="30122">30122</option>
-        <option value="30123">30123</option>
-        <option value="30124">30124</option>
-        <option value="30125">30125</option>
-        <option value="30126">30126</option>
-        <option value="30127">30127</option>
-        <option value="30128">30128</option>
-        <option value="30129">30129</option>
-        <option value="30131">30131</option>
-        <option value="30132">30132</option>
-        <option value="30133">30133</option>
-        <option value="30134">30134</option>
-        <option value="30138">30138</option>
-        <option value="30139">30139</option>
-        <option value="30140">30140</option>
-        <option value="30141">30141</option>
-        <option value="30142">30142</option>
-        <option value="30145">30145</option>
-        <option value="30146">30146</option>
-        <option value="30147">30147</option>
-        <option value="30148">30148</option>
-      </select>
-      <br />
-      <input accept=".xlsx, .xls, .xlsb" id="upload" type="file" /><span
-        id="file-name"
-      ></span>
-      <br />
-      <input type="checkbox" id="onlyElectro" name="onlyElectro" />
-      <label class="onlyElectro" for="onlyElectro"
-        ><b>Apenas etiquetas ELETRO?</b></label
-      >
 
-      <br />
-      <button type="submit">gerar etiquetas</button
-      ><button id="printButton" style="display: none; margin-left: 10px">
-        Imprimir
-      </button>
-    </form>
-    <div id="conteudo"></div>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-    <script src="script_01.js"></script>
-    <script src="script_02.js"></script>
-    <script src="main.js"></script>
+    <div class="form_index">
+      <h2>Selecione a planilha:</h2>
+      <div class="form_opt" onclick="location.href='/index_01.html';">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              stroke="#363636"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15.414 5.586l-11 11a2 2 0 000 2.828l8.172 8.172a2 2 0 002.828 0l11-11A2 2 0 0027 15.172V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586zM10 19l5.5-5.5M13 22l2.5-2.5"
+            ></path>
+            <path fill="#363636" d="M23 10a1 1 0 11-2 0 1 1 0 012 0z"></path>
+          </g>
+        </svg>
+        <p>reposicionamento</p>
+      </div>
+      <div class="form_opt" onclick="location.href='/index_02.html';">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12.4856 1.12584C12.1836 0.958052 11.8164 0.958052 11.5144 1.12584L2.51436 6.12584L2.5073 6.13784L2.49287 6.13802C2.18749 6.3177 2 6.64568 2 7V16.9999C2 17.3631 2.19689 17.6977 2.51436 17.874L11.5022 22.8673C11.8059 23.0416 12.1791 23.0445 12.4856 22.8742L21.4856 17.8742C21.8031 17.6978 22 17.3632 22 17V7C22 6.64568 21.8125 6.31781 21.5071 6.13813C21.4996 6.13372 21.4921 6.12942 21.4845 6.12522L12.4856 1.12584ZM5.05923 6.99995L12.0001 10.856L14.4855 9.47519L7.74296 5.50898L5.05923 6.99995ZM16.5142 8.34816L18.9409 7L12 3.14396L9.77162 4.38195L16.5142 8.34816ZM4 16.4115V8.69951L11 12.5884V20.3004L4 16.4115ZM13 20.3005V12.5884L20 8.69951V16.4116L13 20.3005Z"
+              fill="#363636"
+            ></path>
+          </g>
+        </svg>
+        <p>estoque de loja</p>
+      </div>
+
+      <div class="form_opt" onclick="location.href='/index_mktplace.html';">
+        <svg
+          viewBox="0 0 24 24"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          fill="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <title>qrcode_fill</title>
+            <g
+              id="页面-1"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+            >
+              <g
+                id="Device"
+                transform="translate(-384.000000, -144.000000)"
+                fill-rule="nonzero"
+              >
+                <g
+                  id="qrcode_fill"
+                  transform="translate(384.000000, 144.000000)"
+                >
+                  <path
+                    d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                    id="MingCute"
+                    fill-rule="nonzero"
+                  ></path>
+                  <path
+                    d="M14,13 C14.51285,13 14.9355092,13.386027 14.9932725,13.8833761 L15,14 L15,20 C15,20.5523 14.5523,21 14,21 C13.48715,21 13.0644908,20.613973 13.0067275,20.1166239 L13,20 L13,14 C13,13.4477 13.4477,13 14,13 Z M17,17.5 C17.5523,17.5 18,17.9477 18,18.5 L18,20 C18,20.5523 17.5523,21 17,21 C16.4477,21 16,20.5523 16,20 L16,18.5 C16,17.9477 16.4477,17.5 17,17.5 Z M20,13 C20.51285,13 20.9355092,13.386027 20.9932725,13.8833761 L21,14 L21,20 C21,20.5523 20.5523,21 20,21 C19.48715,21 19.0644908,20.613973 19.0067275,20.1166239 L19,20 L19,14 C19,13.4477 19.4477,13 20,13 Z M9,13 C10.1046,13 11,13.8954 11,15 L11,19 C11,20.1046 10.1046,21 9,21 L5,21 C3.89543,21 3,20.1046 3,19 L3,15 C3,13.8954 3.89543,13 5,13 L9,13 Z M17,13 C17.51285,13 17.9355092,13.386027 17.9932725,13.8833761 L18,14 L18,15.5 C18,16.0523 17.5523,16.5 17,16.5 C16.48715,16.5 16.0644908,16.113973 16.0067275,15.6166239 L16,15.5 L16,14 C16,13.4477 16.4477,13 17,13 Z M9,3 C10.1046,3 11,3.89543 11,5 L11,9 C11,10.1046 10.1046,11 9,11 L5,11 C3.89543,11 3,10.1046 3,9 L3,5 C3,3.89543 3.89543,3 5,3 L9,3 Z M19,3 C20.1046,3 21,3.89543 21,5 L21,9 C21,10.1046 20.1046,11 19,11 L15,11 C13.8954,11 13,10.1046 13,9 L13,5 C13,3.89543 13.8954,3 15,3 L19,3 Z"
+                    id="形状"
+                    fill="#363636"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <p>marketplace</p>
+      </div>
+    </div>
   </body>
 </html>

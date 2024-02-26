@@ -1,114 +1,4 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  font-family: "Outfit", sans-serif;
-}
-.hero {
-  width: 100%;
-  height: min-content;
-  background-color: #f5f2eb;
-  padding: 3vw 5vw;
-}
-.hero img {
-  max-height: 2vw;
-  margin: 0;
-}
-#uploadForm {
-  max-width: 90vw;
-  margin: 2vw auto;
-}
-.label01 {
-  font-family: "Outfit", sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  margin-right: 16px;
-}
-select {
-  padding: 10px 16px;
-  margin: 10px 10px 10px 0;
-  border-radius: 999px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  width: max-content;
-  font-family: "Outfit", sans-serif;
-  font-size: 16px;
-  background: none;
-  /* margin-right: 10px; */
-}
-#uploadForm input {
-  padding: 10px 16px;
-  margin-bottom: 10px;
-  border-radius: 999px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  width: 80%;
-  font-family: "Outfit", sans-serif;
-  font-size: 16;
-}
-#onlyElectro {
-  max-width: fit-content !important; 
-  width: 20px;
-  height: 20px;
-  transform: scale(1.3);
-  border-radius: 999px;
-  margin-right: 10px;
-}
-.onlyElectro {
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px;
-  line-height: 3;
-}
-#uploadForm button {
-  padding: 12px 18px;
-  margin: 10px 0;
-  border-radius: 999px;
-  border: none;
-  width: max-content;
-  font-family: "Outfit", sans-serif;
-  font-size: 16px;
-  background-color: #be1823;
-  color: #f0f0f0 !important;
-}
-/* Esconde o input original */
-
-/* Estiliza o botão "falso" */
-.custom-file-upload {
-  padding: 12px 18px;
-  background-color: #f5f2eb;
-  color: #0f0f0f;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: "Outfit", sans-serif;
-  font-size: 16px;
-  text-align: center;
-  display: inline-block;
-  margin: 10px 16px 10px 0;
-}
-
-/* Para quando o mouse estiver em cima */
-.custom-file-upload:hover {
-  background-color: #e6dcc7;
-}
-#file-name {
-  font-family: "Outfit", sans-serif;
-}
-.hero h1 {
-  font-family: "Outfit", sans-serif;
-  font-size: clamp(24px, 5vw, 52px);
-  font-weight: 300;
-  margin: 1vw 0 0 0;
-}
-.hero h4 {
-  font-family: "Outfit", sans-serif;
-  margin: 0;
-  font-weight: 300;
-  font-size: 16px;
-}
-#conteudo {
+#dataContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 5mm;
@@ -129,36 +19,76 @@ select {
   -webkit-print-color-adjust: exact !important;
   color-adjust: exact !important;
   print-color-adjust: exact !important;
+  font-family: "Outfit", sans-serif;
 }
-.labelA6 .sku {
+
+.labelA6 .skuID {
   position: absolute;
   bottom: 10mm;
   right: 10mm;
   font-size: 4mm;
 }
-.labelA6 .produto {
+
+.labelA6 .prod {
   font-size: 6mm;
   line-height: 7.8mm;
   margin-bottom: 10mm;
   overflow: hidden;
   max-height: 23.4mm;
   text-transform: uppercase;
+  text-wrap: balance;
 }
-.labelA6 .categoria {
-  height: 10mm;
-  display: flex;
-  gap: 5mm;
-}
-.valor {
+.labelA6 .valor {
   margin-top: auto;
 }
-.labelA6 .categoria::before {
+.labelA6 .preco_full {
+  font-size: 8mm;
+  text-decoration: line-through;
+  opacity: 0.5;
+  margin: auto 0 0 0;
+}
+.labelA6 .preco_full::before {
+  content: "R$ \0020";
+  font-weight: 300;
+  font-size: 8mm;
+}
+.labelA6 .preco {
+  font-size: 12mm;
+  margin: 0;
+}
+.labelA6 .preco::before {
+  content: "R$";
+  margin-right: 5px;
+  font-size: 9mm;
+  font-weight: 300;
+}
+.labelA6 .cshbck,
+.labelA6 .dezoff {
+  position: absolute;
+  bottom: 10mm;
+  left: 10mm;
+}
+.labelA6 .cat {
+  height: 10mm;
+  min-width: 10mm;
+  width: min-content;
+  line-height: 10mm;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  text-transform: lowercase;
+  font-size: 0;
+  height: 10mm;
+  display: flex;
+  gap: 2mm;
+}
+.labelA6 .cat::before {
   content: " ";
   height: 10mm;
   width: 10mm;
   display: block;
 }
-.labelA6 .categoria::after {
+.labelA6 .cat::after {
   height: 10mm;
   min-width: 10mm;
   width: max-content;
@@ -167,6 +97,18 @@ select {
   -webkit-print-color-adjust: exact !important;
   color-adjust: exact !important;
   print-color-adjust: exact !important;
+  font-size: 5mm !important;
+}
+.decorar::before {
+  background: url("https://img.camicado.com.br/banner/etiquetas/decor.svg")
+    no-repeat center center;
+  background-size: cover;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.decorar::after {
+  content: "decorar";
 }
 .organizar::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/organizar.svg")
@@ -188,7 +130,7 @@ select {
   print-color-adjust: exact !important;
 }
 .camaba::after {
-  content: "cama & banho";
+  content: "camaba";
 }
 .cozinhar::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/cozinhar.svg")
@@ -201,6 +143,7 @@ select {
 .cozinhar::after {
   content: "cozinhar";
 }
+.servir::before,
 .mesaposta::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/mesaposta.svg")
     no-repeat center center;
@@ -209,7 +152,8 @@ select {
   color-adjust: exact !important;
   print-color-adjust: exact !important;
 }
-.mesaposta::after {
+.mesaposta::after,
+.servir::after {
   content: "mesa posta";
 }
 .eletro::before {
@@ -223,6 +167,7 @@ select {
 .eletro::after {
   content: "eletro";
 }
+.beber::before,
 .bar::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/bar.svg")
     no-repeat center center;
@@ -231,19 +176,9 @@ select {
   color-adjust: exact !important;
   print-color-adjust: exact !important;
 }
+.beber::after,
 .bar::after {
   content: "bar";
-}
-.decorar::before {
-  background: url("https://img.camicado.com.br/banner/etiquetas/decor.svg")
-    no-repeat center center;
-  background-size: cover;
-  -webkit-print-color-adjust: exact !important;
-  color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-.decorar::after {
-  content: "decorar";
 }
 .pet::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/pet.svg")
@@ -256,141 +191,60 @@ select {
 .pet::after {
   content: "pet";
 }
-hr {
-  width: 100%;
-  margin-top: 5mm;
-  opacity: 0.1;
-  height: 0.5px;
-}
 
-.labelA6 .preco_full {
-  font-size: 8mm;
-  text-decoration: line-through;
-  opacity: 0.5;
-  margin: auto 0 0 0;
-}
-.labelA6 .preco_full:before {
-  content: "R$ \0020";
-  font-weight: 300;
-  font-size: 8mm;
-}
-.labelA6 .desconto {
-  font-size: 12mm;
-  margin: 0;
-}
-.labelA6 .desconto::before {
-  content: "R$";
-  margin-right: 5px;
-  font-size: 9mm;
-  font-weight: 300;
-}
-.labelA6 .cshbck,
-.labelA6 .dezoff {
-  position: absolute;
-  bottom: 10mm;
-  left: 10mm;
-}
+@media print {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
 
-span {
-  font-weight: 500;
-}
-.loja {
-  display: none;
-}
+  /* Sugerir ao navegador que use a menor margem possível */
+  @page {
+    margin: 0 !important;
+    size: auto; /* pode tentar definir um tamanho específico se necessário */
+  }
+  /* Oculta elementos desnecessários para impressão */
+  .form,
+  .header {
+    display: none;
+  }
+  #dataContainer {
+    margin: 0;
+    gap: 0;
+  }
 
-/* Etiquetas eletro */
-
-.labelA9 {
-  width: 54mm;
-  height: 38mm;
-  min-height: 37mm;
-  min-width: 60mm;
-  border: 1px solid rgb(209, 209, 209);
-  padding: 3mm;
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  -webkit-print-color-adjust: exact !important;
-  color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.labelA9 .produto {
-  font-size: 3.5mm;
-  line-height: 3.5mm;
-  margin-bottom: 4mm;
-  max-width: 45mm;
-  overflow: hidden;
-  max-height: 7mm;
-  min-height: 5mm;
-  position: absolute;
-  top: 12mm;
-  text-transform: uppercase;
-  font-weight: 600 !important;
-}
-
-.labelA9 .sku {
-  position: absolute;
-  bottom: unset;
-  top: 3mm;
-  right: 3mm;
-  font-size: 3mm;
-  opacity: 1;
-}
-.labelA9 .categoria {
-  height: 6mm;
-  display: flex;
-  gap: 3mm;
-  position: absolute;
-}
-
-.labelA9 .categoria::before {
-  content: " ";
-  height: 6mm;
-  width: 6mm;
-  display: block;
-}
-
-.labelA9 .categoria::after {
-  height: 6mm;
-  min-width: 6mm;
-  width: max-content;
-  display: block;
-  line-height: 6mm;
-  -webkit-print-color-adjust: exact !important;
-  color-adjust: exact !important;
-  print-color-adjust: exact !important;
-  font-size: 4mm;
-  font-weight: 500;
-}
-
-.labelA9 .preco_full {
-  font-size: 4.5mm;
-  text-decoration: line-through;
-  opacity: 0.9;
-  margin: auto 0 0 0;
-  line-height: 4.5mm;
-  font-weight: 400 !important;
-}
-.labelA9 .preco_full::before {
-  content: "R$ \0020";
-  font-size: 4.5mm;
-  font-weight: 400 !important;
-  line-height: 4.5mm;
-}
-
-.labelA9 .desconto::before,
-.labelA9 .desconto {
-  content: "R$";
-  margin-right: 5px;
-  font-size: 5mm !important;
-  font-weight: 600 !important;
-  line-height: 1;
-}
-
-.labelA9 .dezoff,
-.labelA9 .cshbck,
-.labelA9 .vezes {
-  display: none;
+  /* Define a classe .print-page para controlar a quebra de página */
+  .print-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+    height: 296mm;
+    width: 210mm;
+    page-break-after: always; /* Força quebra de página após o contêiner */
+    break-after: page; /* Alternativa para navegadores modernos */
+  }
+  .labelA6 {
+    break-after: auto; /* Permite a quebra de página, mas não força */
+    counter-increment: labelCounter; /* Incrementa um contador */
+  }
+  .labelA6:nth-of-type(1n),
+  .labelA6:nth-of-type(2n) {
+    border-top: 0px;
+    border-bottom: 1px solid black;
+  }
+  .labelA6:nth-of-type(3n),
+  .labelA6:nth-of-type(4n) {
+    border-top: 0px;
+  }
+  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
+  .labelA6:nth-of-type(4n) {
+    break-after: page; /* Força uma quebra de página após cada dois .labelA6 */
+  }
+  .labelA6 {
+    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
+    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+  }
 }

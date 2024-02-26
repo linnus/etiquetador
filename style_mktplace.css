@@ -1,0 +1,129 @@
+/* Estilo básico para os containers de linha e coluna */
+#dataContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5mm;
+  font-family: "Outfit", sans-serif;
+  margin: 3vw auto;
+  max-width: 95vw;
+}
+.labelA6 {
+  width: 80mm;
+  height: 240mm;
+  min-height: 240mm;
+  border: 1px solid rgb(209, 209, 209);
+  padding: 16mm 10mm;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  font-family: "Outfit", sans-serif;
+}
+
+.labelA6 .skuID {
+  font-size: 3.5mm;
+  font-weight: 300;
+}
+
+.labelA6 .prod {
+  font-size: 7mm;
+  line-height: 8.2mm;
+  overflow: hidden;
+  max-height: 32.8mm;
+  text-transform: none;
+  text-wrap: balance;
+  font-weight: 500;
+}
+.labelA6 .valor {
+}
+.labelA6 .preco_full {
+  font-size: 9mm;
+  opacity: 1;
+  margin: 15mm 0;
+  text-align: center;
+  background: #0f0f0f;
+  color: white;
+  border-radius: 999px;
+  padding: 2mm 0;
+}
+.labelA6 .preco_full span {
+  font-weight: 300;
+  font-size: 6mm;
+}
+.labelA6 .preco_full::before {
+  content: "R$ \0020";
+  font-weight: 300;
+  font-size: 6mm;
+}
+.labelA6 .brand {
+  font-size: 4mm;
+  margin-bottom: 5mm;
+}
+.labelA6 .brand::before {
+  content: "Marca: ";
+}
+.labelA6 .material {
+  font-size: 4mm;
+  text-transform: capitalize;
+  margin-bottom: 2mm;
+}
+.labelA6 .material::before {
+  content: "Material: \A • ";
+  white-space: pre-wrap;
+}
+.labelA6 .origem {
+  font-size: 4mm;
+  text-transform: capitalize;
+  margin-bottom: 2mm;
+}
+.labelA6 .origem::before {
+  content: "Origem: \A • ";
+  white-space: pre-wrap;
+}
+.labelA6 .cores {
+  font-size: 4mm;
+  text-transform: capitalize;
+  margin-bottom: 2mm;
+}
+.labelA6 .cores::before {
+  content: "Cores: \A • ";
+  white-space: pre-wrap;
+}
+.qrcode {
+  margin-top: auto;
+  text-align: center;
+}
+.qrcode canvas {
+  width: 35mm !important;
+  height: 35mm !important;
+}
+.qrcode::after {
+  content: "loja | site | app | whats";
+  display: block;
+  font-size: 3.5mm;
+}
+
+@media print {
+  .form,
+  .header {
+    display: none;
+  }
+  .labelA6 {
+    break-after: auto; /* Permite a quebra de página, mas não força */
+    counter-increment: labelCounter; /* Incrementa um contador */
+  }
+
+  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
+  .labelA6:nth-of-type(2n) {
+    break-after: page; /* Força uma quebra de página após cada dois .labelA6 */
+  }
+
+  /* Evita que a .labelA6 seja dividida em duas páginas */
+  .labelA6 {
+    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
+    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+  }
+}

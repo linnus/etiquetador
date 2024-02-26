@@ -1,0 +1,21 @@
+@media print {
+  .form,
+  .header {
+    display: none;
+  }
+  .labelA6 {
+    break-after: auto; /* Permite a quebra de página, mas não força */
+    counter-increment: labelCounter; /* Incrementa um contador */
+  }
+
+  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
+  .labelA6:nth-of-type(2n) {
+    break-after: page; /* Força uma quebra de página após cada dois .labelA6 */
+  }
+
+  /* Evita que a .labelA6 seja dividida em duas páginas */
+  .labelA6 {
+    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
+    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de etiquetas - Camicado</title>
+    <link rel="stylesheet" type="text/css" href="gerador.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <img
+        alt="Logo da Camicado"
+        class="image"
+        src="https://img.camicado.com.br/banner/icons/logo-color.svg"
+      />
+      <h1>Gerador de etiquetas</h1>
+      <h4>versão 0.37 - 240221</h4>
+    </div>
+
+    <div class="form">
+      <div class="formDIV">
+        <label for="fileInput">Selecione o arquivo:</label>
+        <input type="file" id="fileInput" accept=".xls,.xlsx" />
+      </div>
+      <div class="formDIV">
+        <select id="lojasDropdown" style="display: none"></select>
+        <select id="categoryDropdown" style="display: none">
+          <option>Selecione uma categoria</option>
+        </select>
+        <select id="skusDropdown" style="display: none">
+          <option>Selecione um SKU</option>
+        </select>
+      </div>
+      <div class="formDIV">
+        <button id="generateButton" style="display: none">Gerar</button>
+        <button id="printButton" style="display: none">Imprimir</button>
+      </div>
+    </div>
+    <div id="dataContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script_01.js"></script>
+    <script>
+      function imprimirPagina() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
