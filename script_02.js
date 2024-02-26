@@ -167,7 +167,16 @@ function generateDataDisplay() {
     return matchesLoja && matchesCategory && matchesSku;
   });
 
-  rowsToDisplay.forEach((row) => {
+  let printPageDiv; // Variável para manter o contêiner da página de impressão atual
+
+  rowsToDisplay.forEach((row, index) => {
+    // Certifique-se de incluir o parâmetro 'index' aqui
+    // Cria uma nova "página" para cada par de .labelA6
+    if (index % 4 === 0) {
+      printPageDiv = document.createElement("div");
+      printPageDiv.className = "print-page";
+      dataContainer.appendChild(printPageDiv);
+    }
     const rowDiv = document.createElement("div");
     rowDiv.className = "labelA6"; // Aplica a classe labelA6 à div de linha
 
@@ -251,5 +260,6 @@ function generateDataDisplay() {
 
     // Adiciona a rowDiv completa ao dataContainer
     dataContainer.appendChild(rowDiv);
+    printPageDiv.appendChild(rowDiv); // Adiciona a rowDiv ao contêiner da página de impressão
   });
 }
