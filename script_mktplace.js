@@ -1,43 +1,48 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
 document
-  .getElementById("fileInput")
-  .addEventListener("change", handleFileSelect, false);
-document
   .getElementById("generateButton")
   .addEventListener("click", generateDataDisplay, false);
 
-function handleFileSelect(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const data = e.target.result;
-    const workbook = XLSX.read(data, {
-      type: "binary",
+const spreadsheetUrl =
+  "https://linnus.github.io/etiquetador/mktplace_geral_231207.xlsx";
+loadSpreadsheetFromLink(spreadsheetUrl);
+// Função para carregar dados da planilha de um link
+function loadSpreadsheetFromLink(url) {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.arrayBuffer();
+    })
+    .then((data) => {
+      const workbook = XLSX.read(new Uint8Array(data), {
+        type: "array",
+      });
+
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      // Processa os dados da planilha
+      let skus = globalJson
+        .slice(1) // Ignora o cabeçalho
+        .map((row) => `${row[0]} - ${row[1]}`); // Ajuste o índice de acordo com a estrutura da sua planilha
+
+      skus = Array.from(new Set(skus)); // Remove SKUs duplicados
+      skus.sort(); // Ordena as SKUs em ordem alfabética
+
+      // Exibe o dropdown de SKUs após carregar os dados
+      document.getElementById("skusDropdown").style.display = "inline-block";
+      fillDropdown(
+        ["Selecione um SKU", "Gerar Todos", ...skus],
+        "skusDropdown"
+      );
+    })
+    .catch((error) => {
+      console.error("Error loading the spreadsheet:", error);
     });
-
-    const firstSheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[firstSheetName];
-    globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-    // Gera o dropdown de SKUs sem filtros
-    let skus = globalJson
-      .slice(1) // Ignora o cabeçalho
-      .map((row) => `${row[0]} - ${row[1]}`); // Ajuste o índice de acordo com a estrutura da sua planilha
-
-    // Remove SKUs duplicados
-    skus = Array.from(new Set(skus));
-
-    // Ordena as SKUs em ordem alfabética
-    skus.sort();
-
-    // Exibe o dropdown de SKUs após carregar os dados
-    document.getElementById("skusDropdown").style.display = "inline-block";
-    // Adiciona as opções "Selecione um SKU" e "Gerar Todos" no início da lista
-    fillDropdown(["Selecione um SKU", "Gerar Todos", ...skus], "skusDropdown");
-  };
-
-  reader.readAsBinaryString(file);
 }
 
 function fillDropdown(options, dropdownId) {
@@ -67,7 +72,6 @@ document
       document.getElementById("generateButton").style.display = "none";
     }
   });
-
 function generateDataDisplay() {
   const selectedSku = document.getElementById("skusDropdown").value;
   const dataContainer = document.getElementById("dataContainer");

@@ -1,8 +1,49 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
-document
-  .getElementById("fileInput")
-  .addEventListener("change", handleFileSelect, false);
+const spreadsheetUrl = "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL da sua planilha
+
+function loadSpreadsheetData() {
+  fetch(spreadsheetUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.arrayBuffer();
+    })
+    .then((data) => {
+      const workbook = XLSX.read(data, {
+        type: "array",
+      });
+
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      // Processa os dados como antes...
+      // Por exemplo, se você quiser carregar categorias no dropdown:
+      const categories = globalJson
+        .map((row) => row[1])
+        .filter((value, index) => index > 0);
+      const uniqueCategories = Array.from(new Set(categories));
+
+      // Exibe o dropdown de categorias após carregar os dados
+      document.getElementById("categoryDropdown").style.display =
+        "inline-block";
+
+      // Adiciona as opções "Selecione uma categoria" e "Todas as Categorias" no início
+      fillDropdown(
+        ["Selecione uma categoria", "Todas as Categorias", ...uniqueCategories],
+        "categoryDropdown"
+      );
+    })
+    .catch((error) => {
+      console.error("Failed to load the spreadsheet data:", error);
+    });
+}
+
+// Chama a função quando a página é carregada
+loadSpreadsheetData();
+
 document
   .getElementById("categoryDropdown")
   .addEventListener("change", handleCategoryChange, false);

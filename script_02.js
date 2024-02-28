@@ -1,9 +1,6 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
 document
-  .getElementById("fileInput")
-  .addEventListener("change", handleFileSelect, false);
-document
   .getElementById("categoryDropdown")
   .addEventListener("change", handleCategoryChange, false);
 document
@@ -14,43 +11,52 @@ document
   .getElementById("lojasDropdown")
   .addEventListener("change", handleLojasChange, false);
 
-function handleFileSelect(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const data = e.target.result;
-    const workbook = XLSX.read(data, {
-      type: "binary",
+const spreadsheetUrl =
+  "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL real da sua planilha
+loadSpreadsheetFromLink(spreadsheetUrl);
+
+function loadSpreadsheetFromLink(url) {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.arrayBuffer();
+    })
+    .then((data) => {
+      const workbook = XLSX.read(new Uint8Array(data), {
+        type: "array",
+      });
+
+      // Pega o nome da segunda aba/sheet
+      const secondSheetName = workbook.SheetNames[1];
+      // Obtém a segunda aba/sheet
+      const worksheet = workbook.Sheets[secondSheetName];
+      globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      // Processa os dados da planilha
+      const lojas = globalJson
+        .map((row) => row[5])
+        .filter((value, index) => index > 0 && value); // Filtra valores não vazios
+      const uniqueLojas = Array.from(new Set(lojas));
+
+      // Exibe o dropdown de lojas após carregar os dados
+      document.getElementById("lojasDropdown").style.display = "block";
+      fillDropdown(["Selecione a loja", ...uniqueLojas], "lojasDropdown");
+
+      // Considerando que o dropdown de categorias deve começar oculto
+      // e será exibido somente após a seleção de uma loja
+      document.getElementById("categoryDropdown").style.display = "none";
+      fillDropdown(["Selecione uma categoria"], "categoryDropdown"); // Inicializa com a opção de prompt
+
+      // O dropdown de SKUs também deve começar oculto e será exibido somente
+      // após a seleção de uma categoria, o que será tratado na função handleCategoryChange
+      document.getElementById("skusDropdown").style.display = "none";
+      fillDropdown(["Selecione um SKU"], "skusDropdown"); // Inicializa com a opção de prompt
+    })
+    .catch((error) => {
+      console.error("Error loading the spreadsheet:", error);
     });
-
-    // Pega o nome da segunda aba/sheet
-    const secondSheetName = workbook.SheetNames[1];
-    // Obtém a segunda aba/sheet
-    const worksheet = workbook.Sheets[secondSheetName];
-    globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-    // Assume que a coluna F é a sexta coluna, com índice 5
-    const lojas = globalJson
-      .map((row) => row[5])
-      .filter((value, index) => index > 0 && value); // Filtra valores não vazios
-    const uniqueLojas = Array.from(new Set(lojas));
-
-    // Exibe o dropdown de lojas após carregar os dados
-    document.getElementById("lojasDropdown").style.display = "block";
-    fillDropdown(["Selecione a loja", ...uniqueLojas], "lojasDropdown");
-
-    // Considerando que o dropdown de categorias deve começar oculto
-    // e será exibido somente após a seleção de uma loja
-    document.getElementById("categoryDropdown").style.display = "none";
-    fillDropdown(["Selecione uma categoria"], "categoryDropdown"); // Inicializa com a opção de prompt
-
-    // O dropdown de SKUs também deve começar oculto e será exibido somente
-    // após a seleção de uma categoria, o que será tratado na função handleCategoryChange
-    document.getElementById("skusDropdown").style.display = "none";
-    fillDropdown(["Selecione um SKU"], "skusDropdown"); // Inicializa com a opção de prompt
-  };
-
-  reader.readAsBinaryString(file);
 }
 
 function handleLojasChange(event) {
