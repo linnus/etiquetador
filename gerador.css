@@ -5,10 +5,35 @@
 body {
   margin: 0;
 }
-
+#wrapper {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2vw;
+  min-height: 100vh;
+}
+.geradorForm {
+  background: #eee;
+  height: 100%;
+}
+#skusDropdown {
+  max-width: 30vw;
+  margin: 2vw 0 10px 0;
+  height: 20vh;
+}
+#skusDropdownLabel {
+  font-size: 12px;
+}
+.dynamic {
+  position: fixed;
+  bottom: 1vw;
+  right: 1vw;
+  z-index: 9999;
+  display: none;
+}
 .header {
   width: 100%;
-  background: #f5f2eb;
+  background: #eee;
   font-family: "Outfit", sans-serif;
   padding: 2vw;
 }
@@ -27,7 +52,7 @@ body {
   margin: 0;
 }
 .form {
-  background: #f5f2eb;
+  background: #eee;
   font-family: "Outfit", sans-serif;
   padding: 2vw;
   display: flex;
@@ -36,7 +61,6 @@ body {
 }
 
 .form label {
-  display: block;
   margin: 10px 0;
 }
 #fileInput {
@@ -71,7 +95,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  padding: 13px 16px;
+  padding: 13px 36px 13px 16px;
   font-family: "Outfit", sans-serif;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   background: white;
@@ -82,11 +106,31 @@ body {
   margin-right: 16px;
   position: relative;
 }
+.formSelects {
+  display: grid;
+  grid-template-columns: min-content min-content;
+}
+.select-container {
+  position: relative;
+}
+.select-container:after {
+  content: "\25BC";
+  position: absolute;
+  right: 24px;
+  font-family: "Outfit", sans-serif;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  opacity: 0.4;
+}
+.select-container-01 {
+  grid-column: span 2;
+}
 /* Estilo básico para os containers de linha e coluna */
 .form_index {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  background: #f5f2eb;
+  background: #eee;
   gap: 1vw;
   padding: 2vw 2vw 2vw 2vw;
 }
@@ -130,7 +174,7 @@ body {
   width: max-content;
   font-family: "Outfit", sans-serif;
   font-size: 14px;
-  background-color: #f5f2eb !important;
+  background-color: #eee !important;
   color: #363636 !important;
   text-transform: lowercase;
   font-weight: 400;

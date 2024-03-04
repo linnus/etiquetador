@@ -1,6 +1,7 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
-const spreadsheetUrl = "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL da sua planilha
+const spreadsheetUrl =
+  "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL da sua planilha
 
 function loadSpreadsheetData() {
   fetch(spreadsheetUrl)
@@ -27,8 +28,7 @@ function loadSpreadsheetData() {
       const uniqueCategories = Array.from(new Set(categories));
 
       // Exibe o dropdown de categorias após carregar os dados
-      document.getElementById("categoryDropdown").style.display =
-        "inline-block";
+      document.getElementById("categoryDropdown").style.display = "block";
 
       // Adiciona as opções "Selecione uma categoria" e "Todas as Categorias" no início
       fillDropdown(
@@ -47,38 +47,10 @@ loadSpreadsheetData();
 document
   .getElementById("categoryDropdown")
   .addEventListener("change", handleCategoryChange, false);
+
 document
   .getElementById("generateButton")
   .addEventListener("click", generateDataDisplay, false);
-
-function handleFileSelect(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const data = e.target.result;
-    const workbook = XLSX.read(data, {
-      type: "binary",
-    });
-
-    const firstSheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[firstSheetName];
-    globalJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-    const categories = globalJson
-      .map((row) => row[1])
-      .filter((value, index) => index > 0);
-    const uniqueCategories = Array.from(new Set(categories));
-    // Exibe o dropdown de categorias após carregar os dados
-    document.getElementById("categoryDropdown").style.display = "inline-block";
-    // Adiciona as opções "Selecione uma categoria" e "Todas as Categorias" no início
-    fillDropdown(
-      ["Selecione uma categoria", "Todas as Categorias", ...uniqueCategories],
-      "categoryDropdown"
-    );
-  };
-
-  reader.readAsBinaryString(file);
-}
 
 function fillDropdown(options, dropdownId) {
   const dropdown = document.getElementById(dropdownId);
@@ -91,21 +63,24 @@ function fillDropdown(options, dropdownId) {
     dropdown.appendChild(optionElement);
   });
 
-  // Define a primeira opção como desabilitada e selecionada
-  dropdown.firstChild.disabled = true;
-  dropdown.firstChild.selected = true;
+  // Se for o dropdown de SKUs, não define a primeira opção como desabilitada
+  if (dropdownId !== "skusDropdown") {
+    dropdown.firstChild.disabled = true;
+    dropdown.firstChild.selected = true;
+  }
 }
 
 function handleCategoryChange(event) {
   const selectedCategory = event.target.value;
   let skus;
-  // Exibe o dropdown de SKUs apenas se uma categoria válida for selecionada
   if (selectedCategory !== "Selecione uma categoria") {
-    document.getElementById("skusDropdown").style.display = "inline-block";
+    document.getElementById("skusDropdown").style.display = "block";
+    document.getElementById("skusDropdownLabel").style.display = "block";
   } else {
-    // Oculta o dropdown de SKUs se "Selecione uma categoria" for selecionado
     document.getElementById("skusDropdown").style.display = "none";
+    document.getElementById("skusDropdownLabel").style.display = "none";
   }
+
   if (selectedCategory === "Todas as Categorias") {
     skus = globalJson
       .slice(1) // Ignora o cabeçalho
@@ -116,51 +91,57 @@ function handleCategoryChange(event) {
       .map((row) => `${row[0]} - ${row[2]}`);
   }
 
-  // Ordena as SKUs em ordem alfabética
   skus.sort();
 
-  // Adiciona as opções "Selecione um SKU" e "Gerar Todos" no início da lista
-  fillDropdown(["Selecione um SKU", "Gerar Todos", ...skus], "skusDropdown");
+  // Adiciona a opção "Gerar Todos" no início da lista de SKUs
+  fillDropdown(["Gerar Todos", ...skus], "skusDropdown");
 }
 
 // Oculta o botão gerar
-document
-  .getElementById("skusDropdown")
-  .addEventListener("change", function (event) {
-    const selectedSku = event.target.value;
-    // Verifica se o SKU selecionado é válido e não é o prompt de seleção
-    if (selectedSku !== "" && selectedSku !== "Selecione um SKU") {
-      document.getElementById("generateButton").style.display = "inline-block"; // Exibe o botão
-    } else {
-      document.getElementById("generateButton").style.display = "none"; // Mantém o botão oculto
-    }
-  });
-
+document.getElementById("skusDropdown").addEventListener("change", function () {
+  const selectedSkus = document.getElementById("skusDropdown").selectedOptions;
+  if (selectedSkus.length > 0) {
+    document.getElementById("generateButton").style.display = "inline-block"; // Exibe o botão
+  } else {
+    document.getElementById("generateButton").style.display = "none"; // Mantém o botão oculto
+  }
+});
 function generateDataDisplay() {
-  const selectedSku = document.getElementById("skusDropdown").value;
-  const dataContainer = document.getElementById("dataContainer");
+  const selectedSkus = Array.from(
+    document.getElementById("skusDropdown").selectedOptions
+  ).map((option) => option.value);
 
+  const selectedCategory = document.getElementById("categoryDropdown").value;
+  const dataContainer = document.getElementById("dataContainer");
   dataContainer.innerHTML = ""; // Limpa o container antes de adicionar novos dados
 
-  if (selectedSku === "Selecione um SKU" || selectedSku === "") {
-    return; // Não faz nada se a opção de prompt estiver selecionada
+  if (
+    selectedSkus.length === 0 ||
+    selectedCategory === "Selecione uma categoria"
+  ) {
+    return; // Não faz nada se nenhuma SKU for selecionada ou se a categoria não for selecionada
   }
 
   let rowsToDisplay;
-
-  if (selectedSku === "Gerar Todos") {
-    const selectedCategory = document.getElementById("categoryDropdown").value;
+  if (selectedSkus.includes("Gerar Todos")) {
+    // Filtra as linhas baseadas na categoria selecionada se "Gerar Todos" estiver selecionado
     rowsToDisplay = globalJson
-      .slice(1) // Ignora o cabeçalho
+      .slice(1)
       .filter(
         (row) =>
           selectedCategory === "Todas as Categorias" ||
           row[1] === selectedCategory
       );
   } else {
-    rowsToDisplay = [
-      globalJson.find((row) => `${row[0]} - ${row[2]}` === selectedSku),
-    ].filter((row) => row); // Filtra linhas não definidas
+    // Filtra as linhas que correspondem às SKUs selecionadas
+    rowsToDisplay = globalJson
+      .slice(1)
+      .filter(
+        (row) =>
+          selectedSkus.includes(`${row[0]} - ${row[2]}`) &&
+          (selectedCategory === "Todas as Categorias" ||
+            row[1] === selectedCategory)
+      );
   }
 
   let printPageDiv; // Variável para manter o contêiner da página de impressão atual

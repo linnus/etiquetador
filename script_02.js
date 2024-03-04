@@ -40,19 +40,12 @@ function loadSpreadsheetFromLink(url) {
         .filter((value, index) => index > 0 && value); // Filtra valores não vazios
       const uniqueLojas = Array.from(new Set(lojas));
 
-      // Exibe o dropdown de lojas após carregar os dados
       document.getElementById("lojasDropdown").style.display = "block";
       fillDropdown(["Selecione a loja", ...uniqueLojas], "lojasDropdown");
-
-      // Considerando que o dropdown de categorias deve começar oculto
-      // e será exibido somente após a seleção de uma loja
       document.getElementById("categoryDropdown").style.display = "none";
-      fillDropdown(["Selecione uma categoria"], "categoryDropdown"); // Inicializa com a opção de prompt
-
-      // O dropdown de SKUs também deve começar oculto e será exibido somente
-      // após a seleção de uma categoria, o que será tratado na função handleCategoryChange
+      fillDropdown(["Selecione uma categoria"], "categoryDropdown");
       document.getElementById("skusDropdown").style.display = "none";
-      fillDropdown(["Selecione um SKU"], "skusDropdown"); // Inicializa com a opção de prompt
+      fillDropdown(["Selecione um SKU"], "skusDropdown");
     })
     .catch((error) => {
       console.error("Error loading the spreadsheet:", error);
@@ -76,7 +69,7 @@ function handleLojasChange(event) {
   fillDropdown([], "skusDropdown");
 
   // Atualiza e exibe o dropdown de categorias com as categorias filtradas
-  document.getElementById("categoryDropdown").style.display = "inline-block";
+  document.getElementById("categoryDropdown").style.display = "block";
   fillDropdown(
     ["Selecione uma categoria", "Todas as Categorias", ...uniqueCategories],
     "categoryDropdown"
@@ -124,52 +117,60 @@ function handleCategoryChange(event) {
 
   // Verifica se a categoria selecionada é válida e não é o prompt de seleção
   if (selectedCategory !== "Selecione uma categoria") {
-    document.getElementById("skusDropdown").style.display = "inline-block";
+    document.getElementById("skusDropdown").style.display = "block";
+    document.getElementById("skusDropdownLabel").style.display = "block";
     // Adiciona as opções "Selecione um SKU" e "Gerar Todos" no início da lista
     fillDropdown(["Selecione um SKU", "Gerar Todos", ...skus], "skusDropdown");
   } else {
     // Oculta o dropdown de SKUs se "Selecione uma categoria" for selecionado
     document.getElementById("skusDropdown").style.display = "none";
+    document.getElementById("skusDropdownLabel").style.display = "none";
     fillDropdown(["Selecione um SKU"], "skusDropdown"); // Reseta com a opção de prompt
   }
 }
 
 // Oculta o botão gerar
-document
-  .getElementById("skusDropdown")
-  .addEventListener("change", function (event) {
-    const selectedSku = event.target.value;
-    // Verifica se o SKU selecionado é válido e não é o prompt de seleção
-    if (selectedSku !== "" && selectedSku !== "Selecione um SKU") {
-      document.getElementById("generateButton").style.display = "inline-block"; // Exibe o botão
-    } else {
-      document.getElementById("generateButton").style.display = "none"; // Mantém o botão oculto
-    }
-  });
+document.getElementById("skusDropdown").addEventListener("change", function () {
+  const selectedOptions =
+    document.getElementById("skusDropdown").selectedOptions;
+  const selectedSkus = Array.from(selectedOptions).map(
+    (option) => option.value
+  );
+
+  if (selectedSkus.length > 0) {
+    document.getElementById("generateButton").style.display = "inline-block"; // Exibe o botão
+  } else {
+    document.getElementById("generateButton").style.display = "none"; // Mantém o botão oculto
+  }
+});
 
 function generateDataDisplay() {
-  const selectedSku = document.getElementById("skusDropdown").value;
+  const selectedOptions =
+    document.getElementById("skusDropdown").selectedOptions;
+  const selectedSkus = Array.from(selectedOptions).map(
+    (option) => option.value
+  );
   const selectedCategory = document.getElementById("categoryDropdown").value;
   const selectedLoja = document.getElementById("lojasDropdown").value;
   const dataContainer = document.getElementById("dataContainer");
 
   dataContainer.innerHTML = ""; // Limpa o container antes de adicionar novos dados
 
-  // Não faz nada se a opção de prompt estiver selecionada
-  if (selectedSku === "Selecione um SKU" || selectedSku === "") {
+  if (selectedSkus.includes("Selecione um SKU") || selectedSkus.length === 0) {
     return;
   }
 
   let rowsToDisplay;
 
-  // Filtra os dados com base na loja, na categoria e no SKU selecionados
+  // Filtra os dados com base na loja, na categoria e nos SKUs selecionados
   rowsToDisplay = globalJson.filter((row) => {
     const matchesLoja =
       selectedLoja === "Selecione uma loja" || row[5] === selectedLoja;
     const matchesCategory =
       selectedCategory === "Todas as Categorias" || row[0] === selectedCategory;
     const matchesSku =
-      selectedSku === "Gerar Todos" || `${row[3]} - ${row[2]}` === selectedSku;
+      selectedSkus.includes("Gerar Todos") ||
+      selectedSkus.includes(`${row[3]} - ${row[2]}`);
     return matchesLoja && matchesCategory && matchesSku;
   });
 
