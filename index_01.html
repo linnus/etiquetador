@@ -6,45 +6,60 @@
     <title>Gerador de etiquetas - Camicado</title>
     <link rel="stylesheet" type="text/css" href="gerador.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="header">
-      <img
-        alt="Logo da Camicado"
-        class="image"
-        src="https://img.camicado.com.br/banner/icons/logo-color.svg"
-      />
-      <h1>Gerador de etiquetas</h1>
-      <h4>versão 0.37 - 240221</h4>
-      <button class="back" onclick="location.href='/etiquetador/index.html';">
-        voltar
-      </button>
-      <button class="reset" onClick="window.location.reload();">
-        recomeçar
-      </button>
-    </div>
-
-    <div class="form">
-      <div class="formDIV">
-        <select id="categoryDropdown" style="display: none">
-          <option>Selecione uma categoria</option>
-        </select>
-        <select id="skusDropdown" style="display: none">
-          <option>Selecione um SKU</option>
-        </select>
+    <div id="wrapper">
+      <div class="geradorForm">
+        <div class="header">
+          <img
+            alt="Logo da Camicado"
+            class="image"
+            src="https://img.camicado.com.br/banner/icons/logo-color.svg"
+          />
+          <h1>Gerador de etiquetas</h1>
+          <h4>versão 0.37 - 240604</h4>
+          <button
+            class="back"
+            onclick="location.href='/etiquetador/index.html';"
+          >
+            voltar
+          </button>
+          <button class="reset" onClick="window.location.reload();">
+            recomeçar
+          </button>
+        </div>
+        <div class="form">
+          <div class="formDIV">
+            <select id="categoryDropdown" style="display: none">
+              <option>Selecione uma categoria</option>
+            </select>
+            <select id="skusDropdown" style="display: none" multiple>
+              <option>Selecione um SKU</option>
+            </select>
+            <p id="skusDropdownLabel" style="display: none">
+              *segure CTRL para selecionar vários SKUs
+            </p>
+          </div>
+          <div class="formDIV">
+            <button id="generateButton" style="display: none">Gerar</button>
+            <button
+              id="printButton"
+              style="display: none"
+              onclick="imprimirPagina()"
+            >
+              Imprimir
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="formDIV">
-        <button id="generateButton" style="display: none">Gerar</button>
-        <button
-          id="printButton"
-          style="display: none"
-          onclick="imprimirPagina()"
-        >
-          Imprimir
-        </button>
-      </div>
+      <div id="dataContainer"></div>
     </div>
-    <div id="dataContainer"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="script_01.js"></script>

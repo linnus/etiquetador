@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 5mm;
   font-family: "Outfit", sans-serif;
-  margin: 3vw auto;
+  margin: 3vw 0;
   max-width: 95vw;
 }
 .labelA6 {
@@ -191,7 +191,13 @@
 .pet::after {
   content: "pet";
 }
-
+@media screen {
+  .print-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+  }
+}
 @media print {
   html,
   body {
@@ -208,7 +214,8 @@
   }
   /* Oculta elementos desnecessários para impressão */
   .form,
-  .header {
+  .header,
+  .geradorForm {
     display: none;
   }
   #dataContainer {
@@ -223,8 +230,8 @@
     grid-auto-rows: 1fr 1fr;
     height: 296mm;
     width: 210mm;
-    page-break-after: always; /* Força quebra de página após o contêiner */
-    break-after: page; /* Alternativa para navegadores modernos */
+    page-break-after: always; 
+    break-after: page; 
   }
   .labelA6 {
     break-after: auto; /* Permite a quebra de página, mas não força */

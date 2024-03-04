@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   gap: 5mm;
   font-family: "Outfit", sans-serif;
-  margin: 3vw auto;
+  margin: 3vw auto 3vw 0;
   max-width: 95vw;
 }
 .labelA6 {
@@ -105,25 +105,59 @@
   display: block;
   font-size: 3.5mm;
 }
-
+@media screen {
+  .print-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+  }
+}
 @media print {
+  /* Remover margens padrão e preencher toda a página */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Definir o tamanho e margens da página */
+  @page {
+    size: A4 portrait;
+    margin: 0mm; /* Use margem zero para ocupar toda a página */
+  }
+
+  /* Ocultar elementos que não devem ser impressos */
   .form,
-  .header {
+  .header,
+  .geradorForm {
     display: none;
   }
-  .labelA6 {
-    break-after: auto; /* Permite a quebra de página, mas não força */
-    counter-increment: labelCounter; /* Incrementa um contador */
+
+  /* Ajustar o contêiner principal para impressão */
+  #dataContainer {
+    margin: 0;
+    gap: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
-  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
-  .labelA6:nth-of-type(2n) {
-    break-after: page; /* Força uma quebra de página após cada dois .labelA6 */
+  /* Configurar cada página de impressão */
+  .print-page {
+    page-break-after: always; /* Garante que cada .print-page comece em uma nova folha */
+    break-after: page;
+    height: 297mm; /* Altura padrão para A4 */
+    width: 210mm; /* Largura padrão para A4 */
+    break-inside: avoid; /* Evita quebras dentro do elemento */
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  /* Evita que a .labelA6 seja dividida em duas páginas */
   .labelA6 {
-    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
-    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+    break-inside: avoid; /* Evita quebras dentro de cada .labelA6 */
+    page-break-inside: avoid;
   }
 }

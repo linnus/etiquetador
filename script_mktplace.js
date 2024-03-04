@@ -62,36 +62,44 @@ function fillDropdown(options, dropdownId) {
 }
 
 // Atualizar o event listener para o dropdown de SKUs
-document
-  .getElementById("skusDropdown")
-  .addEventListener("change", function (event) {
-    const selectedSku = event.target.value;
-    if (selectedSku !== "Selecione um SKU") {
-      document.getElementById("generateButton").style.display = "inline-block";
-    } else {
-      document.getElementById("generateButton").style.display = "none";
-    }
-  });
+document.getElementById("skusDropdown").addEventListener("change", function () {
+  const selectedOptions =
+    document.getElementById("skusDropdown").selectedOptions;
+  const selectedSkus = Array.from(selectedOptions).map(
+    (option) => option.value
+  );
+
+  if (selectedSkus.length > 0 && !selectedSkus.includes("Selecione um SKU")) {
+    document.getElementById("generateButton").style.display = "inline-block";
+  } else {
+    document.getElementById("generateButton").style.display = "none";
+  }
+});
 function generateDataDisplay() {
-  const selectedSku = document.getElementById("skusDropdown").value;
+  const selectedOptions =
+    document.getElementById("skusDropdown").selectedOptions;
+  const selectedSkus = Array.from(selectedOptions).map(
+    (option) => option.value
+  );
   const dataContainer = document.getElementById("dataContainer");
 
   dataContainer.innerHTML = ""; // Limpa o container antes de adicionar novos dados
 
-  if (selectedSku === "Selecione um SKU" || selectedSku === "") {
-    return; // Não faz nada se a opção de prompt estiver selecionada
+  // Se apenas a opção de prompt estiver selecionada, não faz nada
+  if (selectedSkus.length === 1 && selectedSkus[0] === "Selecione um SKU") {
+    return;
   }
 
   let rowsToDisplay;
 
-  if (selectedSku === "Gerar Todos") {
+  if (selectedSkus.includes("Gerar Todos")) {
     // Usa todos os dados, exceto o cabeçalho
     rowsToDisplay = globalJson.slice(1);
   } else {
-    // Encontra a linha que corresponde ao SKU selecionado
-    rowsToDisplay = [
-      globalJson.find((row) => `${row[0]} - ${row[1]}` === selectedSku),
-    ].filter((row) => row); // Filtra linhas não definidas
+    // Filtra as linhas que correspondem a qualquer uma das SKUs selecionadas
+    rowsToDisplay = globalJson
+      .slice(1)
+      .filter((row) => selectedSkus.includes(`${row[0]} - ${row[1]}`));
   }
 
   let printPageDiv; // Variável para manter o contêiner da página de impressão atual
