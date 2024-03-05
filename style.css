@@ -121,6 +121,7 @@
 .organizar::after {
   content: "organizar";
 }
+.cama-e-banho::before,
 .camaba::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/camaba.svg")
     no-repeat center center;
@@ -129,8 +130,9 @@
   color-adjust: exact !important;
   print-color-adjust: exact !important;
 }
+.cama-e-banho::after,
 .camaba::after {
-  content: "camaba";
+  content: "Cama & banho";
 }
 .cozinhar::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/cozinhar.svg")
@@ -143,6 +145,7 @@
 .cozinhar::after {
   content: "cozinhar";
 }
+.comer::before,
 .servir::before,
 .mesaposta::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/mesaposta.svg")
@@ -152,6 +155,7 @@
   color-adjust: exact !important;
   print-color-adjust: exact !important;
 }
+.comer::after,
 .mesaposta::after,
 .servir::after {
   content: "mesa posta";
@@ -230,8 +234,8 @@
     grid-auto-rows: 1fr 1fr;
     height: 296mm;
     width: 210mm;
-    page-break-after: always; 
-    break-after: page; 
+    page-break-after: always;
+    break-after: page;
   }
   .labelA6 {
     break-after: auto; /* Permite a quebra de página, mas não força */

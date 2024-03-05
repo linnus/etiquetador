@@ -1,7 +1,7 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
 const spreadsheetUrl =
-  "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL da sua planilha
+  "https://linnus.github.io/etiquetador/estoque_240305.xlsx"; // Substitua com a URL da sua planilha
 
 function loadSpreadsheetData() {
   fetch(spreadsheetUrl)
@@ -51,6 +51,11 @@ document
 document
   .getElementById("generateButton")
   .addEventListener("click", generateDataDisplay, false);
+
+function formatPrice(value) {
+  // Converte o valor para número e formata com duas casas decimais
+  return Number(value).toFixed(2);
+}
 
 function fillDropdown(options, dropdownId) {
   const dropdown = document.getElementById(dropdownId);
@@ -171,9 +176,18 @@ function generateDataDisplay() {
     const displayPrecoFull = columnValues[2] !== columnValues[3];
 
     columnIndexOrder.forEach((index, order) => {
-      const cellDiv = document.createElement("div");
-      const cellValue = columnValues[order];
+      let cellValue = columnValues[order];
       let cellClass = `column ${columnClasses[order]}`;
+
+      // Formatar valores de preço com duas casas decimais
+      if (
+        columnClasses[order] === "preco_full" ||
+        columnClasses[order] === "preco"
+      ) {
+        cellValue = formatPrice(cellValue); // Atualiza o cellValue com o valor formatado
+      }
+
+      const cellDiv = document.createElement("div");
 
       // Se a coluna for 'cat', adiciona o valor da célula como uma classe
       if (columnClasses[order] === "cat" && cellValue) {
@@ -181,7 +195,7 @@ function generateDataDisplay() {
       }
 
       cellDiv.className = cellClass;
-      cellDiv.innerHTML = cellValue; // Usa innerHTML para permitir a inclusão do HTML no texto
+      cellDiv.innerHTML = cellValue;
 
       // Agrupa as divs .preco_full e .preco dentro da div .valor
       if (cellClass.includes("preco_full") && !displayPrecoFull) {
