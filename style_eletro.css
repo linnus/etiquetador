@@ -1,0 +1,114 @@
+/* Etiquetas eletro */
+
+.labelA9 {
+  width: 54mm;
+  height: 38mm;
+  min-height: 37mm;
+  min-width: 60mm;
+  border: 1px solid rgb(209, 209, 209);
+  padding: 3mm;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  font-family: "Outfit", sans-serif;
+}
+
+.labelA9 .prod {
+  font-size: 3.5mm;
+  line-height: 3.5mm;
+  margin-bottom: 4mm;
+  max-width: 45mm;
+  overflow: hidden;
+  max-height: 7mm;
+  min-height: 5mm;
+  position: absolute;
+  top: 14mm;
+  text-transform: uppercase;
+  font-weight: 600 !important;
+}
+
+.labelA9 .skuID {
+  position: absolute;
+  bottom: unset;
+  top: 3mm;
+  right: 3mm;
+  font-size: 3mm;
+  opacity: 1;
+}
+.labelA9 .cat {
+  height: 6mm;
+  display: flex;
+  gap: 1mm;
+  position: absolute;
+  font-size: 0;
+  top: 3mm;
+}
+
+.labelA9 .cat::before {
+  content: " ";
+  height: 6mm;
+  width: 6mm;
+  display: block;
+}
+
+.labelA9 .cat::after {
+  height: 6mm;
+  min-width: 6mm;
+  width: max-content;
+  display: block;
+  line-height: 6mm;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  font-size: 4mm;
+  font-weight: 500;
+}
+.eletro::before {
+  background: url("https://img.camicado.com.br/banner/etiquetas/eletro.svg")
+    no-repeat center center;
+  background-size: cover;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.eletro::after {
+  content: "eletro";
+}
+.labelA9 .valor {
+  position: absolute;
+  bottom: 3mm;
+}
+.labelA9 .preco_full {
+  font-size: 4.5mm;
+  text-decoration: line-through;
+  opacity: 0.9;
+  margin: auto 0 0 0;
+  line-height: 4.5mm;
+  font-weight: 400 !important;
+}
+.labelA9 .preco_full::before {
+  content: "R$ \0020";
+  font-size: 4.5mm;
+  font-weight: 400 !important;
+  line-height: 4.5mm;
+}
+
+.labelA9 .preco::before,
+.labelA9 .preco {
+  content: "R$";
+  margin-right: 5px;
+  font-size: 5mm !important;
+  font-weight: 600 !important;
+  line-height: 1;
+}
+
+.labelA9 .parcel,
+.labelA9 .dezoff,
+.labelA9 .cshbck,
+.labelA9 .vezes {
+  display: none;
+}

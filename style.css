@@ -160,17 +160,6 @@
 .servir::after {
   content: "mesa posta";
 }
-.eletro::before {
-  background: url("https://img.camicado.com.br/banner/etiquetas/eletro.svg")
-    no-repeat center center;
-  background-size: cover;
-  -webkit-print-color-adjust: exact !important;
-  color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-.eletro::after {
-  content: "eletro";
-}
 .beber::before,
 .bar::before {
   background: url("https://img.camicado.com.br/banner/etiquetas/bar.svg")
@@ -234,6 +223,12 @@
     grid-auto-rows: 1fr 1fr;
     height: 296mm;
     width: 210mm;
+    page-break-after: always;
+    break-after: page;
+  }
+  .print-pageA9 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     page-break-after: always;
     break-after: page;
   }

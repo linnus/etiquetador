@@ -1,0 +1,153 @@
+#dataContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5mm;
+  font-family: "Outfit", sans-serif;
+  margin: 3vw 0;
+  max-width: 95vw;
+}
+.print-page {
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  border: 1px solid rgb(209, 209, 209);
+  padding: 45mm 15mm;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(7, min-content);
+  position: relative;
+  gap: 5mm;
+  /*! gap: 0; */
+}
+.labelA6 {
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: min-content 8mm;
+  flex-flow: column;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  font-family: "Outfit", sans-serif;
+  height: min-content;
+  gap: 0 15mm;
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.labelA6 .skuID {
+  font-size: 3.5mm;
+  grid-row: 2 / 3;
+}
+.labelA6 .prod {
+  font-size: 6.5mm;
+  line-height: 7.5mm;
+  overflow: hidden;
+  max-height: 15mm;
+  text-transform: uppercase;
+}
+.labelA6 .valor {
+  display: flex;
+  flex-flow: column;
+  text-align: right;
+  grid-row: span 2;
+}
+.labelA6 .cshbck,
+.labelA6 .dezoff,
+.labelA6 .cat,
+.parcel {
+  display: none;
+}
+.labelA6 .preco_full {
+  font-size: 6mm;
+  margin: 0;
+  line-height: 1;
+  opacity: 0.4;
+  text-decoration: line-through;
+  font-weight: 300;
+}
+.labelA6 .preco_full::before {
+  content: "R$ \0020";
+  margin-right: 0px;
+  font-size: 5mm;
+  font-weight: 300;
+}
+.labelA6 .preco {
+  font-size: 8mm;
+  margin: 0;
+  line-height: 1;
+  margin-bottom: 3mm;
+}
+.labelA6 .preco::before {
+  content: "R$";
+  margin-right: 5px;
+  font-size: 7mm;
+  font-weight: 300;
+  opacity: 0.6;
+}
+div.print-page > .labelA6:first-child::before {
+  content: "A beleza de se sentir em casa";
+  display: block;
+  position: absolute;
+  top: -24mm;
+  font-size: 8mm;
+  font-weight: 500;
+}
+div.print-page > .labelA6:last-child::after {
+  content: "+ 20% de cashback \A site | loja | whats | app";
+  display: block;
+  position: absolute;
+  bottom: -26mm;
+  font-size: 6mm;
+  white-space: pre-wrap;
+  font-weight: 500;
+}
+@media screen {
+}
+@media print {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Sugerir ao navegador que use a menor margem possível */
+  @page {
+    margin: 0 !important;
+    size: auto; /* pode tentar definir um tamanho específico se necessário */
+  }
+  /* Oculta elementos desnecessários para impressão */
+  .form,
+  .header,
+  .geradorForm {
+    display: none;
+  }
+  #dataContainer {
+    margin: 0;
+    gap: 0;
+    max-width: 100%;
+  }
+
+  /* Define a classe .print-page para controlar a quebra de página */
+  .print-page {
+    display: grid;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    page-break-after: always;
+    break-after: page;
+    border: none;
+  }
+  .labelA6 {
+    break-after: auto; /* Permite a quebra de página, mas não força */
+    counter-increment: labelCounter; /* Incrementa um contador */
+  }
+  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
+  .labelA6 {
+    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
+    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+  }
+}

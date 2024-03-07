@@ -1,7 +1,7 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
 const spreadsheetUrl =
-  "https://linnus.github.io/etiquetador/estoque_240305.xlsx"; // Substitua com a URL da sua planilha
+  "https://linnus.github.io/etiquetador/estoque_240228.xlsx"; // Substitua com a URL da sua planilha
 
 function loadSpreadsheetData() {
   fetch(spreadsheetUrl)
@@ -52,11 +52,6 @@ document
   .getElementById("generateButton")
   .addEventListener("click", generateDataDisplay, false);
 
-function formatPrice(value) {
-  // Converte o valor para número e formata com duas casas decimais
-  return Number(value).toFixed(2);
-}
-
 function fillDropdown(options, dropdownId) {
   const dropdown = document.getElementById(dropdownId);
   dropdown.innerHTML = "";
@@ -104,11 +99,27 @@ function handleCategoryChange(event) {
 
 // Oculta o botão gerar
 document.getElementById("skusDropdown").addEventListener("change", function () {
-  const selectedSkus = document.getElementById("skusDropdown").selectedOptions;
-  if (selectedSkus.length > 0) {
-    document.getElementById("generateButton").style.display = "inline-block"; // Exibe o botão
+  const dropdown = document.getElementById("skusDropdown");
+  const selectedOptions = dropdown.selectedOptions;
+  const selectedSkus = Array.from(selectedOptions).map(
+    (option) => option.value
+  );
+
+  // Limite de 5 seleções
+  const maxSelections = 7;
+
+  if (selectedSkus.length > maxSelections) {
+    // Desmarcar a última seleção
+    dropdown.options[dropdown.selectedIndex].selected = false;
+
+    // Alertar o usuário
+    alert(`Você pode selecionar no máximo ${maxSelections} itens.`);
+  }
+
+  if (selectedSkus.length > 0 && !selectedSkus.includes("Selecione um SKU")) {
+    document.getElementById("generateButton").style.display = "inline-block";
   } else {
-    document.getElementById("generateButton").style.display = "none"; // Mantém o botão oculto
+    document.getElementById("generateButton").style.display = "none";
   }
 });
 function generateDataDisplay() {
@@ -154,7 +165,7 @@ function generateDataDisplay() {
   rowsToDisplay.forEach((row, index) => {
     // Certifique-se de incluir o parâmetro 'index' aqui
     // Cria uma nova "página" para cada par de .labelA6
-    if (index % 4 === 0) {
+    if (index % 7 === 0) {
       printPageDiv = document.createElement("div");
       printPageDiv.className = "print-page";
       dataContainer.appendChild(printPageDiv);
@@ -176,18 +187,9 @@ function generateDataDisplay() {
     const displayPrecoFull = columnValues[2] !== columnValues[3];
 
     columnIndexOrder.forEach((index, order) => {
-      let cellValue = columnValues[order];
-      let cellClass = `column ${columnClasses[order]}`;
-
-      // Formatar valores de preço com duas casas decimais
-      if (
-        columnClasses[order] === "preco_full" ||
-        columnClasses[order] === "preco"
-      ) {
-        cellValue = formatPrice(cellValue); // Atualiza o cellValue com o valor formatado
-      }
-
       const cellDiv = document.createElement("div");
+      const cellValue = columnValues[order];
+      let cellClass = `column ${columnClasses[order]}`;
 
       // Se a coluna for 'cat', adiciona o valor da célula como uma classe
       if (columnClasses[order] === "cat" && cellValue) {
@@ -195,7 +197,7 @@ function generateDataDisplay() {
       }
 
       cellDiv.className = cellClass;
-      cellDiv.innerHTML = cellValue;
+      cellDiv.innerHTML = cellValue; // Usa innerHTML para permitir a inclusão do HTML no texto
 
       // Agrupa as divs .preco_full e .preco dentro da div .valor
       if (cellClass.includes("preco_full") && !displayPrecoFull) {
@@ -245,13 +247,6 @@ function generateDataDisplay() {
 
     if (valorDiv.hasChildNodes()) {
       rowDiv.appendChild(valorDiv); // Adiciona a div .valor na rowDiv se ela tiver filhos
-    }
-
-    const hasEletroClass =
-      Array.from(rowDiv.getElementsByClassName("eletro")).length > 0;
-    if (hasEletroClass) {
-      rowDiv.className = "labelA9";
-      printPageDiv.className = "print-pageA9"; // Altera a classe para labelA9 se houver um filho com a classe .eletro
     }
     // No final da função, exibe o botão 'Imprimir'
     document.getElementById("printButton").style.display = "inline-block";
