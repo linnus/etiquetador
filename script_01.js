@@ -52,7 +52,7 @@ document
   .getElementById("generateButton")
   .addEventListener("click", generateDataDisplay, false);
 
-function formatPrice(value) {
+function formatPreco(value) {
   // Converte o valor para número e formata com duas casas decimais
   return Number(value).toFixed(2);
 }
@@ -185,7 +185,7 @@ function generateDataDisplay() {
         columnClasses[order] === "preco_full" ||
         columnClasses[order] === "preco"
       ) {
-        cellValue = formatPrice(cellValue); // Atualiza o cellValue com o valor formatado
+        cellValue = formatPreco(cellValue); // Atualiza o cellValue com o valor formatado
       }
 
       const cellDiv = document.createElement("div");
