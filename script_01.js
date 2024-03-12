@@ -130,11 +130,12 @@ function generateDataDisplay() {
   let rowsToDisplay;
   if (selectedSkus.includes("Gerar Todos")) {
     // Filtra as linhas baseadas na categoria selecionada se "Gerar Todos" estiver selecionado
+    // e ignora a categoria "Eletro"
     rowsToDisplay = globalJson
-      .slice(1)
+      .slice(1) // Ignora o cabeçalho
       .filter(
         (row) =>
-          selectedCategory === "Todas as Categorias" ||
+          (selectedCategory === "Todas as Categorias" && row[1] !== "Eletro") ||
           row[1] === selectedCategory
       );
   } else {

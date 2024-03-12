@@ -3,8 +3,8 @@
 .labelA9 {
   width: 54mm;
   height: 38mm;
-  min-height: 37mm;
-  min-width: 60mm;
+  min-height: 38mm;
+  width: 54mm;
   border: 1px solid rgb(209, 209, 209);
   padding: 3mm;
   box-sizing: border-box;

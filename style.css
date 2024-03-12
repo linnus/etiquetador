@@ -203,7 +203,7 @@
   /* Sugerir ao navegador que use a menor margem possível */
   @page {
     margin: 0 !important;
-    size: auto; /* pode tentar definir um tamanho específico se necessário */
+    size: A4 portrait; /* pode tentar definir um tamanho específico se necessário */
   }
   /* Oculta elementos desnecessários para impressão */
   .form,
@@ -215,42 +215,45 @@
     margin: 0;
     gap: 0;
   }
-
   /* Define a classe .print-page para controlar a quebra de página */
   .print-page {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 1fr 1fr;
-    height: 296mm;
-    width: 210mm;
-    page-break-after: always;
+    page-break-after: always; /* Garante que uma nova página comece após o contêiner .print-page */
     break-after: page;
+    display: flex; /* Usa flexbox para acomodar os filhos do .print-page */
+    flex-direction: column; /* Coloca os filhos do .print-page em coluna */
+    align-content: flex-start; /* Alinha os filhos no início do contêiner */
+    flex-wrap: wrap; /* Permite que os filhos do .print-page sejam quebrados para a próxima linha */
+    width: 210mm; /* Largura de uma página A4 */
+    height: 297mm; /* Altura de uma página A4 */
   }
   .print-pageA9 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    page-break-after: always;
+    page-break-after: always; /* Garante que uma nova página comece após o contêiner .print-page */
     break-after: page;
+    display: flex; /* Usa flexbox para acomodar os filhos do .print-page */
+    flex-direction: column; /* Coloca os filhos do .print-page em coluna */
+    align-content: center;
+    justify-content: center; /* Alinha os filhos no início do contêiner */
+    flex-wrap: wrap; /* Permite que os filhos do .print-page sejam quebrados para a próxima linha */
+    width: 128mm;
+    height: 99mm;
+    margin: 0 auto;
   }
   .labelA6 {
-    break-after: auto; /* Permite a quebra de página, mas não força */
-    counter-increment: labelCounter; /* Incrementa um contador */
+    page-break-inside: avoid; /* Evita quebras de página dentro de .labelA6 */
+    break-inside: avoid; /* Evita quebras de página dentro de .labelA6 */
+    max-width: 105mm;
+    max-height: 148mm;
+    min-width: 105mm;
+    min-height: 148mm;
+    border: 1px solid grey;
   }
-  .labelA6:nth-of-type(1n),
-  .labelA6:nth-of-type(2n) {
-    border-top: 0px;
-    border-bottom: 1px solid black;
-  }
-  .labelA6:nth-of-type(3n),
-  .labelA6:nth-of-type(4n) {
-    border-top: 0px;
-  }
-  /* Para cada .labelA6 que é múltiplo de 2, force uma quebra de página após */
-  .labelA6:nth-of-type(4n) {
-    break-after: page; /* Força uma quebra de página após cada dois .labelA6 */
-  }
-  .labelA6 {
-    break-inside: avoid; /* Evita quebra dentro do .labelA6 */
-    page-break-inside: avoid; /* Outra forma de evitar quebra dentro do .labelA6 para navegadores mais antigos */
+  .labelA9 {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    width: 54mm;
+    height: 38mm;
+    min-height: 38mm;
+    width: 54mm;
+    border: 1px solid grey;
   }
 }

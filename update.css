@@ -1,0 +1,8 @@
+.version::before {
+  content: "0.37 - 240312";
+  display: block;
+}
+.version::after {
+  content: "Planilha atualizada: 12.03.24";
+  display: block;
+}

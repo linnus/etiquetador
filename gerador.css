@@ -22,7 +22,7 @@ body {
 #skusDropdown {
   max-width: 30vw;
   margin: 2vw 0 10px 0;
-  height: 20vh;
+  height: 25vh;
 }
 #skusDropdownLabel {
   font-size: 12px;
@@ -59,7 +59,7 @@ body {
 .header h4 {
   font-size: 12px;
   font-weight: 300;
-  margin: 0;
+  margin: 0 0 1vw 0;
 }
 .form {
   background: #eee;

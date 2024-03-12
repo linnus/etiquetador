@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="gerador.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="style_eletro.css" />
+    <link rel="stylesheet" type="text/css" href="update.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +25,7 @@
             src="https://img.camicado.com.br/banner/icons/logo-color.svg"
           />
           <h1>Gerador de etiquetas</h1>
-          <h4>0.37 - 240605</h4>
+          <h4 class="version"></h4>
           <button
             class="back"
             onclick="location.href='/etiquetador/index.html';"
@@ -44,7 +45,8 @@
               <option>Selecione um SKU</option>
             </select>
             <p id="skusDropdownLabel" style="display: none">
-              *segure CTRL para selecionar vários SKUs
+              *segure CTRL para selecionar vários SKUs<br>
+              *aperte CTRL+F para buscar SKUs
             </p>
           </div>
           <div class="formDIV">
