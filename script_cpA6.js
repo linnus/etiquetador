@@ -94,7 +94,7 @@ function handleCategoryChange(event) {
   skus.sort();
 
   // Adiciona a opção "Gerar Todos" no início da lista de SKUs
-  fillDropdown(["Gerar Todos", ...skus], "skusDropdown");
+  fillDropdown([...skus], "skusDropdown");
 }
 
 // Oculta o botão gerar
