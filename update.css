@@ -4,7 +4,7 @@
   display: block;
 }
 .version::after {
-  content: "Planilha atualizada: 18.03.24";
+  content: "Planilha atualizada: 27.03.24";
   display: block;
 }
 .version_3p::after {

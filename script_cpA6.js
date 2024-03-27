@@ -1,7 +1,7 @@
 let globalJson; // Variável global para armazenar os dados da planilha
 
 const spreadsheetUrl =
-  "https://linnus.github.io/etiquetador/estoque_240318.xlsx"; // Substitua com a URL da sua planilha
+  "https://linnus.github.io/etiquetador/estoque_240325.xlsx"; // Substitua com a URL da sua planilha
 
 function loadSpreadsheetData() {
   fetch(spreadsheetUrl)
