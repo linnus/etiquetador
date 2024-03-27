@@ -2,13 +2,13 @@
 .version::before {
   content: "0.37 - 240312";
   display: block;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .version::after {
   content: "Planilha atualizada: 27.03.24";
   display: block;
 }
 .version_3p::after {
-  content: "Planilha atualizada: 20.03.24";
+  content: "Planilha atualizada: 27.03.24";
   display: block;
 }
