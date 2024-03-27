@@ -2,6 +2,7 @@
 .version::before {
   content: "0.37 - 240312";
   display: block;
+  margin-top: 10px;
 }
 .version::after {
   content: "Planilha atualizada: 27.03.24";
