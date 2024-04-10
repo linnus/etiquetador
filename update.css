@@ -5,7 +5,7 @@
   margin-top: 20px;
 }
 .version::after {
-  content: "Planilha atualizada: 03.04.24";
+  content: "Planilha atualizada: 10.04.24";
   display: block;
 }
 .version_3p::after {
