@@ -5,7 +5,7 @@ document
   .addEventListener("click", generateDataDisplay, false);
 
 const spreadsheetUrl =
-  "https://linnus.github.io/etiquetador/mktplace_geral_240404.xlsx";
+  "https://linnus.github.io/etiquetador/mktplace_geral_240411.xlsx";
 loadSpreadsheetFromLink(spreadsheetUrl);
 // Função para carregar dados da planilha de um link
 function loadSpreadsheetFromLink(url) {
